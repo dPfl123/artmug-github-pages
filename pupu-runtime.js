@@ -455,6 +455,27 @@ const avatarSection = document.getElementById("avatar");
 
 if (avatarSection) {
     const avatarGrid = avatarSection.querySelector(".avatar-grid");
+    avatarGrid.querySelectorAll(".avatar-card").forEach(card => {
+        if (card.querySelector("h3")?.textContent.includes("아바타 이름")) card.remove();
+    });
+
+    const additionalAvatars = [
+        ["시나노", "SHINANO"], ["아이리", "AIRI"], ["밀티나", "MILTINA"],
+        ["쇼콜라", "CHOCOLAT"], ["쉬폰", "CHIFFON"], ["라임", "LIME"],
+        ["시오", "SHIO"], ["신라", "SHINRA"], ["루미나", "LUMINA"],
+        ["이치고", "ICHIGO"], ["마야", "MAYA"], ["모에", "MOE"],
+        ["키펠", "KIPFEL"], ["코마노", "KOMANO"], ["한카", "HANKA"],
+        ["미나세", "MINASE"], ["리에", "RIER"], ["알루에", "ALUE"],
+        ["카나타", "KANATA"], ["마메히나타", "MAMEHINATA"], ["셀레스트리아", "SELESTIA"]
+    ];
+    additionalAvatars.forEach(([name, english], index) => {
+        const card = document.createElement("div");
+        card.className = "avatar-card ripple";
+        const hue = 205 + (index % 6) * 10;
+        const placeholder = `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="hsl(${hue} 48% 94%)"/><stop offset="1" stop-color="hsl(${hue + 28} 52% 95%)"/></linearGradient></defs><rect width="360" height="360" fill="url(#g)"/><text x="50%" y="48%" text-anchor="middle" fill="#8792aa" font-size="21" font-family="sans-serif">${english}</text><text x="50%" y="59%" text-anchor="middle" fill="#99a2b4" font-size="13" font-family="sans-serif">ADD PHOTO</text></svg>`;
+        card.innerHTML = `<img src="data:image/svg+xml,${encodeURIComponent(placeholder)}" loading="lazy" alt="${name} 이미지 추가 예정"><h3>${name} <span>| ${english}</span></h3>`;
+        avatarGrid.appendChild(card);
+    });
     const avatarCards = Array.from(avatarSection.querySelectorAll(".avatar-card"));
     const avatarPrev = avatarSection.querySelector(".avatar-page-prev");
     const avatarNext = avatarSection.querySelector(".avatar-page-next");
