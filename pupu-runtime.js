@@ -3,6 +3,13 @@
    Premium Glassmorphism UI
 ========================================================== */
 
+const contentOrder = ["top", "artist", "collaboration", "notice", "portfolio", "avatar", "process", "package", "option", "estimate", "faq"];
+const mainContent = document.querySelector("main");
+contentOrder.forEach(id => {
+    const section = document.getElementById(id);
+    if (section) mainContent.appendChild(section);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ==========================
