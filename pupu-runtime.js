@@ -530,3 +530,65 @@ if (avatarSection) {
     mobileQuery.addEventListener?.("change", resetAvatarPagination);
     showAvatarPage(0);
 }
+
+/* ==========================
+   Request estimator
+========================== */
+const estimateSection = document.getElementById("estimate");
+if (estimateSection) {
+    const packageInputs = [...estimateSection.querySelectorAll('input[name="estimatePackage"]')];
+    const optionInputs = [...estimateSection.querySelectorAll('#estimateOptions input')];
+    const nameInput = document.getElementById("requestName");
+    const programInput = document.getElementById("requestProgram");
+    const referenceInput = document.getElementById("requestReference");
+    const memoInput = document.getElementById("requestMemo");
+    const totalOutput = document.getElementById("estimateTotal");
+    const summaryOutput = document.getElementById("estimateSummary");
+    const copyButton = document.getElementById("estimateCopy");
+    const resetButton = document.getElementById("estimateReset");
+    let requestText = "";
+
+    function updateEstimate() {
+        const selectedPackage = packageInputs.find(input => input.checked) || packageInputs[0];
+        const selectedOptions = optionInputs.filter(input => input.checked);
+        const total = Number(selectedPackage.dataset.price) + selectedOptions.reduce((sum, input) => sum + Number(input.dataset.price), 0);
+        const optionText = selectedOptions.length ? selectedOptions.map(input => input.value).join(", ") : "선택 없음";
+        totalOutput.textContent = `${total.toLocaleString("ko-KR")}원`;
+        summaryOutput.textContent = `패키지  ${selectedPackage.value}\n추가 옵션  ${optionText}`;
+        requestText = `[커미션 견적 상담]\n닉네임: ${nameInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
+    }
+
+    async function copyRequest() {
+        updateEstimate();
+        try {
+            await navigator.clipboard.writeText(requestText);
+        } catch (error) {
+            const helper = document.createElement("textarea");
+            helper.value = requestText;
+            helper.style.position = "fixed";
+            helper.style.opacity = "0";
+            document.body.appendChild(helper);
+            helper.select();
+            document.execCommand("copy");
+            helper.remove();
+        }
+        copyButton.textContent = "복사되었어요 ✓";
+        window.setTimeout(() => copyButton.textContent = "의뢰 내용 복사", 1800);
+    }
+
+    [...packageInputs, ...optionInputs, nameInput, programInput, referenceInput, memoInput].forEach(input => {
+        input.addEventListener("input", updateEstimate);
+        input.addEventListener("change", updateEstimate);
+    });
+    copyButton.addEventListener("click", copyRequest);
+    resetButton.addEventListener("click", () => {
+        packageInputs[0].checked = true;
+        optionInputs.forEach(input => input.checked = false);
+        nameInput.value = "";
+        programInput.selectedIndex = 0;
+        referenceInput.value = "";
+        memoInput.value = "";
+        updateEstimate();
+    });
+    updateEstimate();
+}
