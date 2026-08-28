@@ -908,10 +908,16 @@ box-shadow:
 
 }
 
-.timeline-item p{
-    font-size:1.35rem;
-    line-height:2.0;
-}
+.timeline{max-width:1120px;margin:55px auto 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;position:relative}
+.timeline::before{content:"";position:absolute;left:8%;right:8%;top:42px;height:2px;background:linear-gradient(90deg,#87cfff,#badff8,#87cfff);z-index:0}
+.timeline-item{position:relative;z-index:1;min-height:300px;padding:26px 20px 22px;border:1px solid rgba(255,255,255,.82);border-radius:27px;background:linear-gradient(155deg,rgba(255,255,255,.76),rgba(229,244,255,.5));box-shadow:0 20px 48px rgba(67,119,163,.13);transition:.25s ease}
+.timeline-item:hover{transform:translateY(-7px);border-color:#a5d7f8;box-shadow:0 28px 58px rgba(67,119,163,.2)}
+.timeline-number{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 26px;border:5px solid #e9f6ff;border-radius:50%;background:linear-gradient(135deg,#73c5ff,#519fe2);color:#fff;font-size:13px;box-shadow:0 8px 22px rgba(69,153,216,.28)}
+.timeline-item h3{margin:0 0 11px;text-align:center;color:#22314a;font-size:19px}.timeline-item p{margin:0;text-align:center;color:#718099;font-size:13px;line-height:1.8}
+.timeline-meta{display:flex;justify-content:center;margin-top:18px}.timeline-meta span{padding:6px 10px;border:1px solid #d4e9f8;border-radius:999px;background:rgba(255,255,255,.7);color:#4d91c5;font-size:10px}
+.process-guide{max-width:1120px;margin:18px auto 0;padding:17px 21px;display:flex;align-items:center;gap:12px;border:1px solid rgba(170,211,241,.72);border-radius:18px;background:rgba(255,255,255,.42);color:#66758d;font-size:12px;line-height:1.7}.process-guide b{flex:none;display:grid;place-items:center;width:27px;height:27px;border-radius:9px;background:#dff1ff;color:#4596d1}
+@media(max-width:900px){.timeline{grid-template-columns:1fr 1fr}.timeline::before{display:none}.timeline-item{min-height:230px}.timeline-item:last-child{grid-column:1/-1}.timeline-number{margin-left:0}.timeline-item h3,.timeline-item p{text-align:left}.timeline-meta{justify-content:flex-start}}
+@media(max-width:560px){.timeline{grid-template-columns:1fr}.timeline-item:last-child{grid-column:auto}.timeline-item{min-height:0}.process-guide{align-items:flex-start}}
 
 /* =========================================================
    AVATAR
@@ -2068,6 +2074,9 @@ scale(1.5);
 .estimate-subtitle{margin:24px 0 11px;color:#31405b;font-size:15px}
 .estimate-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .estimate-options .estimate-choice{grid-template-columns:22px 1fr;padding:12px 13px}.estimate-options em{grid-column:2}
+.estimate-quantity{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 15px;border:1px solid #d7e9f8;border-radius:17px;background:rgba(255,255,255,.72)}
+.estimate-quantity-copy strong{display:block;color:#27334b;font-size:15px}.estimate-quantity-copy small{display:block;margin-top:3px;color:#8490a5;font-size:11px}
+.quantity-stepper{display:flex;align-items:center;gap:5px;padding:4px;border:1px solid #cfe4f5;border-radius:13px;background:#f5fbff}.quantity-stepper button{display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:9px;background:#fff;color:#3e8fc9;font:inherit;font-size:19px;cursor:pointer;box-shadow:0 3px 8px rgba(70,125,170,.1)}.quantity-stepper button:disabled{opacity:.35;cursor:not-allowed}.quantity-stepper output{min-width:30px;text-align:center;color:#263650;font-size:14px}.estimate-quantity-price{color:#398dce;font-size:12px;white-space:nowrap}
 .estimate-fields{display:grid;gap:13px}.estimate-field{display:grid;gap:7px}.estimate-field label{color:#42506a;font-size:13px}
 .estimate-field input,.estimate-field textarea,.estimate-field select{width:100%;box-sizing:border-box;border:1px solid #d4e6f5;border-radius:14px;background:rgba(255,255,255,.8);padding:13px 14px;color:#25334c;font:inherit;font-size:13px;outline:none;transition:.2s}
 .estimate-field textarea{min-height:105px;resize:vertical;line-height:1.6}.estimate-field input:focus,.estimate-field textarea:focus,.estimate-field select:focus{border-color:#62b3f0;box-shadow:0 0 0 4px rgba(98,179,240,.13)}
@@ -2629,77 +2638,14 @@ OPTION
 
     </div>
 
-    <div class="timeline">
-
-        <div class="timeline-item">
-
-            <div class="timeline-number">01</div>
-
-            <h3>신청</h3>
-
-            <p>
-                신청서 작성 후 필요한 자료를 전달해주세요.
-            </p>
-
-        </div>
-
-        <div class="timeline-line"></div>
-
-        <div class="timeline-item">
-
-            <div class="timeline-number">02</div>
-
-            <h3>결제</h3>
-
-            <p>
-                확인 후 결제를 진행합니다.
-            </p>
-
-        </div>
-
-        <div class="timeline-line"></div>
-
-        <div class="timeline-item">
-
-            <div class="timeline-number">03</div>
-
-            <h3>작업</h3>
-
-            <p>
-                순서에 맞춰 제작을 진행합니다.
-            </p>
-
-        </div>
-
-        <div class="timeline-line"></div>
-
-        <div class="timeline-item">
-
-            <div class="timeline-number">04</div>
-
-            <h3>컨펌</h3>
-
-            <p>
-                수정사항을 확인하고 반영합니다.
-            </p>
-
-        </div>
-
-        <div class="timeline-line"></div>
-
-        <div class="timeline-item">
-
-            <div class="timeline-number">05</div>
-
-            <h3>완성</h3>
-
-            <p>
-                최종 파일을 전달합니다.
-            </p>
-
-        </div>
-
+    <div class="timeline reveal">
+        <article class="timeline-item"><div class="timeline-number">01</div><h3>의뢰서 접수</h3><p>원하는 패키지와 옵션을 고르고 캐릭터 자료, 사용 프로그램, 요청사항을 전달해 주세요.</p><div class="timeline-meta"><span>신청자 자료 준비</span></div></article>
+        <article class="timeline-item"><div class="timeline-number">02</div><h3>자료 확인 · 견적</h3><p>작업 가능 여부와 난이도를 확인한 뒤 최종 금액, 일정, 협업 범위를 안내합니다.</p><div class="timeline-meta"><span>최종 견적 확정</span></div></article>
+        <article class="timeline-item"><div class="timeline-number">03</div><h3>결제 · 작업 시작</h3><p>안내받은 내용에 동의하고 결제가 확인되면 예약 순서에 맞춰 제작을 시작합니다.</p><div class="timeline-meta"><span>작업기간 기본 14일</span></div></article>
+        <article class="timeline-item"><div class="timeline-number">04</div><h3>중간 컨펌</h3><p>중간 결과물을 확인하고 기본 수정 범위 안에서 의견을 전달해 주세요.</p><div class="timeline-meta"><span>기본 수정 3회</span></div></article>
+        <article class="timeline-item"><div class="timeline-number">05</div><h3>완성 · 전달</h3><p>최종 확인을 마친 뒤 사용 가능한 완성 파일과 필요한 안내사항을 전달합니다.</p><div class="timeline-meta"><span>최종 파일 전달</span></div></article>
     </div>
+    <div class="process-guide"><b>!</b><span>일정은 자료가 모두 전달되고 결제가 확인된 시점부터 계산됩니다. 큰 방향 변경이나 기본 횟수를 넘는 수정은 추가 비용과 기간이 발생할 수 있어요.</span></div>
 
 </section>
 
@@ -2849,7 +2795,11 @@ id="portfolioThumbs">
                     <label class="estimate-choice"><input type="checkbox" value="텍스처 원화" data-price="100000"><strong>텍스처 원화</strong><em>+100,000원</em></label>
                     <label class="estimate-choice"><input type="checkbox" value="원화 얼굴 전체 텍스처" data-price="50000"><strong>얼굴 전체 텍스처</strong><em>+50,000원</em></label>
                     <label class="estimate-choice"><input type="checkbox" value="포트폴리오 비공개" data-price="30000"><strong>포트폴리오 비공개</strong><em>+30,000원</em></label>
-                    <label class="estimate-choice"><input type="checkbox" value="추가 컨펌 1회" data-price="5000"><strong>추가 컨펌 1회</strong><em>+5,000원</em></label>
+                    <div class="estimate-quantity">
+                        <div class="estimate-quantity-copy"><strong>추가 컨펌</strong><small>기본 수정 3회 이후 · 회당 5,000원</small></div>
+                        <div class="quantity-stepper" aria-label="추가 컨펌 횟수"><button type="button" id="confirmMinus" aria-label="추가 컨펌 줄이기">−</button><output id="confirmCount" aria-live="polite">0</output><button type="button" id="confirmPlus" aria-label="추가 컨펌 늘리기">+</button></div>
+                        <span class="estimate-quantity-price" id="confirmPrice">+0원</span>
+                    </div>
                 </div>
             </div>
             <div class="estimate-panel">
@@ -2858,7 +2808,9 @@ id="portfolioThumbs">
                 <p class="estimate-help">작성 내용은 서버로 전송되지 않고 현재 화면에서만 정리됩니다.</p>
                 <div class="estimate-fields">
                     <div class="estimate-field"><label for="requestName">닉네임</label><input id="requestName" type="text" maxlength="30" placeholder="상담할 때 사용할 이름"></div>
+                    <div class="estimate-field"><label for="requestContact">상담 연락처 또는 아이디</label><input id="requestContact" type="text" maxlength="80" placeholder="답변받을 수 있는 연락처·SNS 아이디"></div>
                     <div class="estimate-field"><label for="requestProgram">사용 프로그램</label><select id="requestProgram"><option value="미정">아직 정하지 않았어요</option><option value="Warudo">Warudo</option><option value="VSeeFace">VSeeFace</option><option value="기타 / 상담 필요">기타 / 상담 필요</option></select></div>
+                    <div class="estimate-field"><label for="requestDeadline">희망 마감일</label><input id="requestDeadline" type="date"></div>
                     <div class="estimate-field"><label for="requestReference">자료 링크</label><input id="requestReference" type="url" inputmode="url" placeholder="공개 가능한 구글 드라이브·노션 등의 링크"></div>
                     <div class="estimate-field"><label for="requestMemo">원하는 분위기와 요청사항</label><textarea id="requestMemo" maxlength="700" placeholder="캐릭터의 성격, 원하는 표정이나 움직임, 꼭 반영되었으면 하는 부분을 적어주세요."></textarea></div>
                 </div>
@@ -3549,23 +3501,36 @@ if (estimateSection) {
     const packageInputs = [...estimateSection.querySelectorAll('input[name="estimatePackage"]')];
     const optionInputs = [...estimateSection.querySelectorAll('#estimateOptions input')];
     const nameInput = document.getElementById("requestName");
+    const contactInput = document.getElementById("requestContact");
     const programInput = document.getElementById("requestProgram");
+    const deadlineInput = document.getElementById("requestDeadline");
     const referenceInput = document.getElementById("requestReference");
     const memoInput = document.getElementById("requestMemo");
+    const confirmMinus = document.getElementById("confirmMinus");
+    const confirmPlus = document.getElementById("confirmPlus");
+    const confirmCountOutput = document.getElementById("confirmCount");
+    const confirmPriceOutput = document.getElementById("confirmPrice");
     const totalOutput = document.getElementById("estimateTotal");
     const summaryOutput = document.getElementById("estimateSummary");
     const copyButton = document.getElementById("estimateCopy");
     const resetButton = document.getElementById("estimateReset");
     let requestText = "";
+    let confirmCount = 0;
 
     function updateEstimate() {
         const selectedPackage = packageInputs.find(input => input.checked) || packageInputs[0];
         const selectedOptions = optionInputs.filter(input => input.checked);
-        const total = Number(selectedPackage.dataset.price) + selectedOptions.reduce((sum, input) => sum + Number(input.dataset.price), 0);
-        const optionText = selectedOptions.length ? selectedOptions.map(input => input.value).join(", ") : "선택 없음";
+        const total = Number(selectedPackage.dataset.price) + selectedOptions.reduce((sum, input) => sum + Number(input.dataset.price), 0) + confirmCount * 5000;
+        const selectedOptionNames = selectedOptions.map(input => input.value);
+        if (confirmCount) selectedOptionNames.push(`추가 컨펌 ${confirmCount}회`);
+        const optionText = selectedOptionNames.length ? selectedOptionNames.join(", ") : "선택 없음";
+        confirmCountOutput.textContent = String(confirmCount);
+        confirmPriceOutput.textContent = `+${(confirmCount * 5000).toLocaleString("ko-KR")}원`;
+        confirmMinus.disabled = confirmCount === 0;
+        confirmPlus.disabled = confirmCount === 10;
         totalOutput.textContent = `${total.toLocaleString("ko-KR")}원`;
         summaryOutput.textContent = `패키지  ${selectedPackage.value}\n추가 옵션  ${optionText}`;
-        requestText = `[커미션 견적 상담]\n닉네임: ${nameInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
+        requestText = `[커미션 견적 상담]\n닉네임: ${nameInput.value.trim() || "미입력"}\n상담 연락처: ${contactInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n희망 마감일: ${deadlineInput.value || "미정"}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
     }
 
     async function copyRequest() {
@@ -3586,16 +3551,21 @@ if (estimateSection) {
         window.setTimeout(() => copyButton.textContent = "의뢰 내용 복사", 1800);
     }
 
-    [...packageInputs, ...optionInputs, nameInput, programInput, referenceInput, memoInput].forEach(input => {
+    [...packageInputs, ...optionInputs, nameInput, contactInput, programInput, deadlineInput, referenceInput, memoInput].forEach(input => {
         input.addEventListener("input", updateEstimate);
         input.addEventListener("change", updateEstimate);
     });
+    confirmMinus.addEventListener("click", () => { confirmCount = Math.max(0, confirmCount - 1); updateEstimate(); });
+    confirmPlus.addEventListener("click", () => { confirmCount = Math.min(10, confirmCount + 1); updateEstimate(); });
     copyButton.addEventListener("click", copyRequest);
     resetButton.addEventListener("click", () => {
         packageInputs[0].checked = true;
         optionInputs.forEach(input => input.checked = false);
+        confirmCount = 0;
         nameInput.value = "";
+        contactInput.value = "";
         programInput.selectedIndex = 0;
+        deadlineInput.value = "";
         referenceInput.value = "";
         memoInput.value = "";
         updateEstimate();

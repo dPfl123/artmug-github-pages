@@ -546,23 +546,36 @@ if (estimateSection) {
     const packageInputs = [...estimateSection.querySelectorAll('input[name="estimatePackage"]')];
     const optionInputs = [...estimateSection.querySelectorAll('#estimateOptions input')];
     const nameInput = document.getElementById("requestName");
+    const contactInput = document.getElementById("requestContact");
     const programInput = document.getElementById("requestProgram");
+    const deadlineInput = document.getElementById("requestDeadline");
     const referenceInput = document.getElementById("requestReference");
     const memoInput = document.getElementById("requestMemo");
+    const confirmMinus = document.getElementById("confirmMinus");
+    const confirmPlus = document.getElementById("confirmPlus");
+    const confirmCountOutput = document.getElementById("confirmCount");
+    const confirmPriceOutput = document.getElementById("confirmPrice");
     const totalOutput = document.getElementById("estimateTotal");
     const summaryOutput = document.getElementById("estimateSummary");
     const copyButton = document.getElementById("estimateCopy");
     const resetButton = document.getElementById("estimateReset");
     let requestText = "";
+    let confirmCount = 0;
 
     function updateEstimate() {
         const selectedPackage = packageInputs.find(input => input.checked) || packageInputs[0];
         const selectedOptions = optionInputs.filter(input => input.checked);
-        const total = Number(selectedPackage.dataset.price) + selectedOptions.reduce((sum, input) => sum + Number(input.dataset.price), 0);
-        const optionText = selectedOptions.length ? selectedOptions.map(input => input.value).join(", ") : "선택 없음";
+        const total = Number(selectedPackage.dataset.price) + selectedOptions.reduce((sum, input) => sum + Number(input.dataset.price), 0) + confirmCount * 5000;
+        const selectedOptionNames = selectedOptions.map(input => input.value);
+        if (confirmCount) selectedOptionNames.push(`추가 컨펌 ${confirmCount}회`);
+        const optionText = selectedOptionNames.length ? selectedOptionNames.join(", ") : "선택 없음";
+        confirmCountOutput.textContent = String(confirmCount);
+        confirmPriceOutput.textContent = `+${(confirmCount * 5000).toLocaleString("ko-KR")}원`;
+        confirmMinus.disabled = confirmCount === 0;
+        confirmPlus.disabled = confirmCount === 10;
         totalOutput.textContent = `${total.toLocaleString("ko-KR")}원`;
         summaryOutput.textContent = `패키지  ${selectedPackage.value}\n추가 옵션  ${optionText}`;
-        requestText = `[커미션 견적 상담]\n닉네임: ${nameInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
+        requestText = `[커미션 견적 상담]\n닉네임: ${nameInput.value.trim() || "미입력"}\n상담 연락처: ${contactInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n희망 마감일: ${deadlineInput.value || "미정"}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
     }
 
     async function copyRequest() {
@@ -583,16 +596,21 @@ if (estimateSection) {
         window.setTimeout(() => copyButton.textContent = "의뢰 내용 복사", 1800);
     }
 
-    [...packageInputs, ...optionInputs, nameInput, programInput, referenceInput, memoInput].forEach(input => {
+    [...packageInputs, ...optionInputs, nameInput, contactInput, programInput, deadlineInput, referenceInput, memoInput].forEach(input => {
         input.addEventListener("input", updateEstimate);
         input.addEventListener("change", updateEstimate);
     });
+    confirmMinus.addEventListener("click", () => { confirmCount = Math.max(0, confirmCount - 1); updateEstimate(); });
+    confirmPlus.addEventListener("click", () => { confirmCount = Math.min(10, confirmCount + 1); updateEstimate(); });
     copyButton.addEventListener("click", copyRequest);
     resetButton.addEventListener("click", () => {
         packageInputs[0].checked = true;
         optionInputs.forEach(input => input.checked = false);
+        confirmCount = 0;
         nameInput.value = "";
+        contactInput.value = "";
         programInput.selectedIndex = 0;
+        deadlineInput.value = "";
         referenceInput.value = "";
         memoInput.value = "";
         updateEstimate();
