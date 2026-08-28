@@ -2281,12 +2281,12 @@ ARTIST INTRODUCTION
         <div class="intro-portrait has-photo">
             <img class="intro-person-image" src="img/pudori.webp" loading="lazy" alt="푸돌이 프로필 이미지">
             <span class="intro-mark">PUDORI · 3D CREATOR</span>
-            <div class="intro-name"><strong>푸돌이</strong><span>3D VIRTUAL COMMISSION</span></div>
+            <div class="intro-name"><strong>푸돌이</strong><span>마라탕을 먹기 위해 커미션을 연 사람</span></div>
         </div>
         <div class="intro-copy">
             <h3>당신의 캐릭터가 자연스럽게 움직이도록</h3>
-            <p>원화의 분위기와 캐릭터성을 살펴보고, 실제 방송 환경에서 편안하게 사용할 수 있는 모습을 함께 만들어갑니다. 작업 전 필요한 자료와 원하는 방향을 충분히 확인하고 진행 과정과 수정 범위를 알기 쉽게 안내합니다.</p>
-            <div class="intro-tags"><span>페이셜</span><span>원화 기반 성형</span><span>아바타 커스텀</span><span>개인작 판매</span></div>
+            <p>안녕하세요. 캐릭터에 애정이 정말 많은 사람인 만큼, 신청자분의 캐릭터에도 애정이 듬뿍 담긴 작업물을 전달해 드리고 싶습니다. 공장처럼 찍어내는 형식이 아니라 캐릭터 하나하나의 개성과 매력을 살피며 세세하고 꼼꼼하게 작업합니다!</p>
+            <div class="intro-tags"><span>페이셜</span><span>원화 기반 성형</span><span>아바타 뚜따</span><span>개인작 판매</span></div>
         </div>
     </div>
 </section>
@@ -2301,7 +2301,7 @@ ARTIST INTRODUCTION
         <div class="intro-portrait collab-portrait has-photo">
             <img class="intro-person-image" src="img/kusidori.png" loading="lazy" alt="협업작가 쿠시돌이 캐릭터 이미지">
             <span class="intro-mark">KUSIDORI · ILLUSTRATOR</span>
-            <div class="intro-name"><strong>쿠시돌이</strong><span>ORIGINAL ART PARTNER</span></div>
+            <div class="intro-name"><strong>쿠시돌이</strong><span>엄마 밥주세요</span></div>
         </div>
         <div class="intro-copy">
             <h3>시선을 사로잡는 원화 작가</h3>
@@ -2662,6 +2662,20 @@ OPTION
 
         </div>
 
+        <div class="option-card">
+
+            <h3>파츠 서치</h3>
+
+            <p>원하는 분위기와 예산에 맞는 BOOTH 파츠를 함께 찾아드립니다.</p>
+
+            <div class="option-info">
+
+                <span>+3,000원</span>
+
+            </div>
+
+        </div>
+
     </div>
 
 </section>
@@ -2850,6 +2864,7 @@ id="portfolioThumbs">
                     <label class="estimate-choice"><input type="checkbox" value="원화 얼굴 전체 텍스처" data-price="50000"><strong>얼굴 전체 텍스처</strong><em>+50,000원</em></label>
                     <label class="estimate-choice"><input type="checkbox" value="포트폴리오 비공개" data-price="30000"><strong>포트폴리오 비공개</strong><em>+30,000원</em></label>
                     <label class="estimate-choice"><input type="checkbox" value="파일 영구 보관" data-price="30000"><strong>파일 영구 보관</strong><em>+30,000원</em></label>
+                    <label class="estimate-choice"><input type="checkbox" value="파츠 서치" data-price="3000"><strong>파츠 서치</strong><em>+3,000원</em></label>
                     <div class="estimate-quantity">
                         <div class="estimate-quantity-copy"><strong>추가 컨펌</strong><small>기본 수정 3회 이후 · 회당 5,000원</small></div>
                         <div class="quantity-stepper" aria-label="추가 컨펌 횟수"><button type="button" id="confirmMinus" aria-label="추가 컨펌 줄이기">−</button><output id="confirmCount" aria-live="polite">0</output><button type="button" id="confirmPlus" aria-label="추가 컨펌 늘리기">+</button></div>
@@ -2869,6 +2884,11 @@ id="portfolioThumbs">
                     <div class="estimate-field"><label for="requestProgram">사용 프로그램</label><select id="requestProgram"><option value="미정">아직 정하지 않았어요</option><option value="와루도 (준비 중)">와루도 (준비 중)</option><option value="VSeeFace">VSeeFace</option><option value="기타 / 상담 필요">기타 / 상담 필요</option></select></div>
                     <div class="estimate-field"><label for="requestDeadline">희망 마감일</label><input id="requestDeadline" type="date"></div>
                     <div class="estimate-field"><label for="requestReference">자료 링크</label><input id="requestReference" type="url" inputmode="url" placeholder="공개 가능한 구글 드라이브·노션 등의 링크"></div>
+                    <p class="estimate-field-guide">사용을 원하는 BOOTH 상품 링크를 종류별로 적어주세요. 원화 작업을 함께 신청하는 경우에는 메이크업 파츠 링크를 비워두셔도 됩니다.</p>
+                    <div class="estimate-field"><label for="requestClothes">의상 BOOTH 링크</label><input id="requestClothes" type="url" inputmode="url" maxlength="500" placeholder="https://booth.pm/ko/items/..."></div>
+                    <div class="estimate-field"><label for="requestHair">헤어 BOOTH 링크</label><input id="requestHair" type="url" inputmode="url" maxlength="500" placeholder="https://booth.pm/ko/items/..."></div>
+                    <div class="estimate-field"><label for="requestMakeup">메이크업 BOOTH 링크</label><input id="requestMakeup" type="url" inputmode="url" maxlength="500" placeholder="원화 신청 시 생략 가능"></div>
+                    <div class="estimate-field"><label for="requestAccessory">액세서리 BOOTH 링크</label><input id="requestAccessory" type="url" inputmode="url" maxlength="500" placeholder="여러 개라면 쉼표로 구분해 주세요"></div>
                     <div class="estimate-field"><label for="requestMemo">원하는 분위기와 요청사항</label><textarea id="requestMemo" maxlength="700" placeholder="캐릭터의 성격, 원하는 표정이나 움직임, 꼭 반영되었으면 하는 부분을 적어주세요."></textarea></div>
                 </div>
                 <div class="estimate-result" aria-live="polite">
@@ -3659,6 +3679,10 @@ if (estimateSection) {
     const programInput = document.getElementById("requestProgram");
     const deadlineInput = document.getElementById("requestDeadline");
     const referenceInput = document.getElementById("requestReference");
+    const clothesInput = document.getElementById("requestClothes");
+    const hairInput = document.getElementById("requestHair");
+    const makeupInput = document.getElementById("requestMakeup");
+    const accessoryInput = document.getElementById("requestAccessory");
     const memoInput = document.getElementById("requestMemo");
     const confirmMinus = document.getElementById("confirmMinus");
     const confirmPlus = document.getElementById("confirmPlus");
@@ -3684,7 +3708,7 @@ if (estimateSection) {
         confirmPlus.disabled = confirmCount === 10;
         totalOutput.textContent = `${total.toLocaleString("ko-KR")}원`;
         summaryOutput.textContent = `패키지  ${selectedPackage.value}\n추가 옵션  ${optionText}`;
-        requestText = `[커미션 견적 상담]\n방송 닉네임: ${nameInput.value.trim() || "미입력"}\n방송국 주소: ${channelInput.value.trim() || "미입력"}\n상담 연락처: ${contactInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n희망 마감일: ${deadlineInput.value || "미정"}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
+        requestText = `[커미션 견적 상담]\n방송 닉네임: ${nameInput.value.trim() || "미입력"}\n방송국 주소: ${channelInput.value.trim() || "미입력"}\n상담 연락처: ${contactInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n희망 마감일: ${deadlineInput.value || "미정"}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n의상 BOOTH 링크: ${clothesInput.value.trim() || "미입력"}\n헤어 BOOTH 링크: ${hairInput.value.trim() || "미입력"}\n메이크업 BOOTH 링크: ${makeupInput.value.trim() || "미입력 / 원화 신청 시 생략 가능"}\n액세서리 BOOTH 링크: ${accessoryInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
     }
 
     async function copyRequest() {
@@ -3705,7 +3729,7 @@ if (estimateSection) {
         window.setTimeout(() => copyButton.textContent = "의뢰 내용 복사", 1800);
     }
 
-    [...packageInputs, ...optionInputs, nameInput, channelInput, contactInput, programInput, deadlineInput, referenceInput, memoInput].forEach(input => {
+    [...packageInputs, ...optionInputs, nameInput, channelInput, contactInput, programInput, deadlineInput, referenceInput, clothesInput, hairInput, makeupInput, accessoryInput, memoInput].forEach(input => {
         input.addEventListener("input", updateEstimate);
         input.addEventListener("change", updateEstimate);
     });
@@ -3722,6 +3746,10 @@ if (estimateSection) {
         programInput.selectedIndex = 0;
         deadlineInput.value = "";
         referenceInput.value = "";
+        clothesInput.value = "";
+        hairInput.value = "";
+        makeupInput.value = "";
+        accessoryInput.value = "";
         memoInput.value = "";
         updateEstimate();
     });
