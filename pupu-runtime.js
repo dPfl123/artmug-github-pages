@@ -190,27 +190,83 @@ document.addEventListener("DOMContentLoaded", () => {
     ========================== */
 
     const mainImage = document.querySelector(".portfolio-main img");
-    const thumbs = document.querySelectorAll(".thumb");
+    const thumbsBox = document.getElementById("portfolioThumbs");
     const prevBtn = document.querySelector(".slide-btn.prev");
     const nextBtn = document.querySelector(".slide-btn.next");
+    const portfolioGallery = document.getElementById("portfolioGallery");
+    const portfolioViewer = document.getElementById("portfolioViewer");
+    const portfolioLock = document.getElementById("portfolioLock");
+    const portfolioEmpty = document.getElementById("portfolioEmpty");
+    const portfolioTitle = document.getElementById("portfolioCategoryTitle");
+    const portfolioClose = document.getElementById("portfolioClose");
 
     let currentIndex = 0;
+    let portfolioImages = [];
 
     function showImage(index) {
-
-        if (!mainImage || thumbs.length === 0) return;
-
-        currentIndex = (index + thumbs.length) % thumbs.length;
-
+        if (!mainImage || portfolioImages.length === 0) return;
+        currentIndex = (index + portfolioImages.length) % portfolioImages.length;
+        const thumbs = [...thumbsBox.querySelectorAll(".thumb")];
         thumbs.forEach(item => item.classList.remove("active"));
-        thumbs[currentIndex].classList.add("active");
-
-        mainImage.src = thumbs[currentIndex].dataset.full || thumbs[currentIndex].src;
-        mainImage.alt = thumbs[currentIndex].alt || "";
+        thumbs[currentIndex]?.classList.add("active");
+        mainImage.src = portfolioImages[currentIndex].src;
+        mainImage.alt = `${portfolioTitle.textContent} 샘플 ${currentIndex + 1}`;
     }
 
-    thumbs.forEach((thumb, index) => {
-        thumb.addEventListener("click", () => showImage(index));
+    function rebuildPortfolioThumbs() {
+        portfolioImages.sort((a, b) => a.number - b.number);
+        thumbsBox.replaceChildren();
+        portfolioImages.forEach((item, index) => {
+            const thumb = new Image();
+            thumb.src = item.src;
+            thumb.className = "thumb";
+            thumb.loading = "lazy";
+            thumb.alt = `${portfolioTitle.textContent} 작은 이미지 ${index + 1}`;
+            thumb.addEventListener("click", () => showImage(index));
+            thumbsBox.appendChild(thumb);
+        });
+        showImage(0);
+    }
+
+    function openPortfolioCategory(button) {
+        const folder = button.dataset.portfolioFolder;
+        const label = button.dataset.portfolioLabel;
+        document.querySelectorAll(".portfolio-category").forEach(item => item.classList.toggle("active", item === button));
+        portfolioTitle.textContent = `${label} 샘플`;
+        portfolioLock.hidden = true;
+        portfolioGallery.hidden = false;
+        portfolioEmpty.hidden = true;
+        portfolioViewer.hidden = true;
+        mainImage.hidden = true;
+        thumbsBox.replaceChildren();
+        portfolioImages = [];
+        currentIndex = 0;
+        let finished = 0;
+
+        for (let index = 1; index <= 20; index++) {
+            const number = String(index).padStart(2, "0");
+            const probe = new Image();
+            probe.onload = () => {
+                portfolioImages.push({ number: index, src: probe.src });
+                portfolioViewer.hidden = false;
+                mainImage.hidden = false;
+                portfolioEmpty.hidden = true;
+                rebuildPortfolioThumbs();
+                finished++;
+            };
+            probe.onerror = () => {
+                finished++;
+                if (finished === 20 && portfolioImages.length === 0) portfolioEmpty.hidden = false;
+            };
+            probe.src = `portfolio/${folder}/${number}.webp`;
+        }
+    }
+
+    document.querySelectorAll(".portfolio-category").forEach(button => button.addEventListener("click", () => openPortfolioCategory(button)));
+    portfolioClose?.addEventListener("click", () => {
+        portfolioGallery.hidden = true;
+        portfolioLock.hidden = false;
+        document.querySelectorAll(".portfolio-category").forEach(item => item.classList.remove("active"));
     });
 
     prevBtn?.addEventListener("click", () => {
@@ -294,14 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* ==========================
-       Initialize
-    ========================== */
-
-    if (thumbs.length > 0) {
-        showImage(0);
-    }
-
-        /* ==========================
        Mobile Swipe
     ========================== */
 
@@ -404,48 +452,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    /* ==========
-AUTO PORTFOLIO
-========== */
-
-const thumbsBox =
-document.getElementById("portfolioThumbs");
-
-if(thumbsBox){
-
-for(let i=1;i<=20;i++){
-
-const num =
-String(i).padStart(2,"0");
-
-const img =
-new Image();
-
-img.src=`portfolio/${num}.webp`;
-
-img.className="thumb";
-
-img.loading="lazy";
-
-img.onerror=()=>{
-
-img.remove();
-
-}
-
-img.onclick=()=>{
-
-showImage(
-i-1
-);
-
-}
-
-thumbsBox.appendChild(img);
-
-}
-
-}
+/* ==========================
+   Hamster click party
+========================== */
+document.addEventListener("click", event => {
+    const icons = ["🐹", "🐹", "🐹", "✦", "♡", "🐾", "✧"];
+    icons.forEach((icon, index) => {
+        const particle = document.createElement("span");
+        const angle = (Math.PI * 2 * index / icons.length) + (Math.random() - .5) * .35;
+        const distance = 68 + Math.random() * 58;
+        particle.className = "hamster-particle";
+        particle.textContent = icon;
+        particle.style.left = `${event.clientX}px`;
+        particle.style.top = `${event.clientY}px`;
+        particle.style.fontSize = `${icon === "🐹" ? 28 + Math.random() * 10 : 20 + Math.random() * 8}px`;
+        particle.style.setProperty("--hx", `${Math.cos(angle) * distance}px`);
+        particle.style.setProperty("--hy", `${Math.sin(angle) * distance - 26}px`);
+        particle.style.setProperty("--hr", `${-35 + Math.random() * 70}deg`);
+        document.body.appendChild(particle);
+        particle.addEventListener("animationend", () => particle.remove(), { once: true });
+    });
+});
 
 /* ==========================
    Avatar Pagination
@@ -466,14 +493,17 @@ if (avatarSection) {
         ["이치고", "ICHIGO"], ["마야", "MAYA"], ["모에", "MOE"],
         ["키펠", "KIPFEL"], ["코마노", "KOMANO"], ["한카", "HANKA"],
         ["미나세", "MINASE"], ["리에", "RIER"], ["알루에", "ALUE"],
-        ["카나타", "KANATA"], ["마메히나타", "MAMEHINATA"], ["셀레스트리아", "SELESTIA"]
+        ["카나타", "KANATA"], ["마메히나타", "MAMEHINATA"], ["셀레스트리아", "SELESTIA"],
+        ["카구야", "KAGUYA", "avatar/kaguya.webp"]
     ];
-    additionalAvatars.forEach(([name, english], index) => {
+    additionalAvatars.forEach(([name, english, imagePath], index) => {
         const card = document.createElement("div");
         card.className = "avatar-card ripple";
         const hue = 205 + (index % 6) * 10;
         const placeholder = `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360"><defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="hsl(${hue} 48% 94%)"/><stop offset="1" stop-color="hsl(${hue + 28} 52% 95%)"/></linearGradient></defs><rect width="360" height="360" fill="url(#g)"/><text x="50%" y="48%" text-anchor="middle" fill="#8792aa" font-size="21" font-family="sans-serif">${english}</text><text x="50%" y="59%" text-anchor="middle" fill="#99a2b4" font-size="13" font-family="sans-serif">ADD PHOTO</text></svg>`;
-        card.innerHTML = `<img src="data:image/svg+xml,${encodeURIComponent(placeholder)}" loading="lazy" alt="${name} 이미지 추가 예정"><h3>${name} <span>| ${english}</span></h3>`;
+        const placeholderSrc = `data:image/svg+xml,${encodeURIComponent(placeholder)}`;
+        card.innerHTML = `<img src="${imagePath || placeholderSrc}" loading="lazy" alt="${name} 이미지"><h3>${name} <span>| ${english}</span></h3>`;
+        if (imagePath) card.querySelector("img").addEventListener("error", event => { event.currentTarget.src = placeholderSrc; }, { once: true });
         avatarGrid.appendChild(card);
     });
     const avatarCards = Array.from(avatarSection.querySelectorAll(".avatar-card"));

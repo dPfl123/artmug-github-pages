@@ -5,7 +5,10 @@
 - `index.html`: 배포할 상세 페이지
 - `img/banner.webp`: 상단 배너 이미지
 - `avatar/manuka.webp`: 마누카 아바타 이미지
-- `portfolio/01.webp` ~ `portfolio/20.webp`: 포트폴리오 이미지
+- `avatar/kaguya.webp`: 카구야 아바타 이미지
+- `portfolio/bboing/01.webp` ~ `20.webp`: 뽀잉눈 샘플
+- `portfolio/facial/01.webp` ~ `20.webp`: 페이셜 샘플
+- `portfolio/sculpt/01.webp` ~ `20.webp`: 원화 기반 성형 샘플
 - `.nojekyll`: GitHub Pages가 파일을 그대로 배포하도록 하는 설정
 
 원본 첨부에는 HTML만 포함되어 있어 위 이미지 파일은 들어 있지 않습니다. 같은 이름과 경로로 이미지를 추가해야 기존 디자인이 완성됩니다. 파일명은 영문 소문자와 숫자를 권장합니다.
@@ -26,7 +29,7 @@
 
 ```html
 <div id="pupuCommissionMount" style="display:block;width:100%;margin:0;padding:0"></div>
-<script src="https://dpfl123.github.io/artmug-github-pages/artmug-loader.js?v=20260828-18"></script>
+<script src="https://dpfl123.github.io/artmug-github-pages/artmug-loader.js?v=20260829-1"></script>
 ```
 
 `artmug-loader.js`가 아트머그 내부에 격리된 상세페이지를 만들고 `pupu-runtime.js`가 페이지 전환과 FAQ 등 상호작용을 실행합니다.
