@@ -22,20 +22,14 @@
 
 ## 아트머그에 연결
 
-아트머그 편집기가 외부 링크를 지원하면 위의 `https://...github.io/.../` 주소를 링크 버튼에 넣습니다. HTML 또는 iframe 삽입을 지원하는 경우에만 아래 형식을 사용합니다.
+아트머그는 외부 URL을 직접 넣은 iframe을 차단할 수 있습니다. 이 저장소는 아트머그에서 실제 사용 중인 것과 같은 외부 JavaScript 로더 방식을 제공합니다. `ARTMUG-PASTE.html`의 아래 두 줄을 아트머그 HTML 편집기에 붙여넣습니다.
 
 ```html
-<iframe
-  src="https://사용자명.github.io/저장소명/"
-  title="푸푸 커미션 상세 페이지"
-  loading="lazy"
-  referrerpolicy="strict-origin-when-cross-origin"
-  sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
-  style="width:100%;min-height:900px;border:0"
-></iframe>
+<div id="pupuCommissionMount" style="display:block;width:100%;margin:0;padding:0"></div>
+<script src="https://dpfl123.github.io/artmug-github-pages/artmug-loader.js?v=20260828-1"></script>
 ```
 
-아트머그가 iframe이나 script를 삭제하면 보안 정책에 따른 정상 동작입니다. 우회하지 말고 외부 페이지 링크 방식으로 연결하세요. 게시 전에 아트머그 고객센터에 외부 페이지·iframe 허용 여부를 확인하는 것이 안전합니다.
+`artmug-loader.js`가 아트머그 내부에 격리된 상세페이지를 만들고 `pupu-runtime.js`가 페이지 전환과 FAQ 등 상호작용을 실행합니다.
 
 ## 보안 점검
 
