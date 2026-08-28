@@ -1140,10 +1140,8 @@ background:rgba(255,255,255,.22);
 ========================================================= */
 
 .notice-box{
-
-display:flex;
-
-flex-direction:column;
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
 
 gap:20px;
 
@@ -1182,6 +1180,12 @@ border-color:var(--border-hover);
 box-shadow:var(--shadow-hover);
 
 }
+.notice-lead{max-width:760px;margin:4px auto 0;color:#667085;font-size:.88rem;line-height:1.85;text-align:center}
+.notice-tools{max-width:940px;margin:28px auto 0;display:flex;justify-content:center}
+.notice-asset-link{display:inline-flex;align-items:center;gap:9px;padding:12px 18px;border:1px solid #9ed2f5;border-radius:999px;background:rgba(255,255,255,.72);color:#287fbd;font-size:.9rem;font-weight:700;box-shadow:0 10px 25px rgba(78,151,205,.13);transition:.2s}.notice-asset-link::after{content:"↗"}.notice-asset-link:hover{transform:translateY(-3px);background:#fff;box-shadow:0 15px 30px rgba(78,151,205,.2)}
+.notice-item.notice-wide{grid-column:1/-1}.notice-item h3{margin-bottom:13px;color:#253b58;font-size:1.14rem}.notice-item ul{display:flex;flex-direction:column;gap:10px}.notice-item li{position:relative;padding-left:17px;line-height:1.85;font-size:.92rem}.notice-item li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;border-radius:50%;background:#69b9ef;box-shadow:0 0 10px rgba(83,171,234,.45)}
+.notice-danger{color:#e14343;font-weight:900}.notice-no{display:inline-flex;margin-left:6px;padding:2px 8px;border-radius:999px;background:#fff0f0;color:#dd3e3e;font-size:.78rem;font-weight:900}.notice-note{display:block;margin-top:8px;padding:10px 12px;border-radius:13px;background:rgba(238,247,255,.72);color:#64748b;font-size:.82rem;line-height:1.75}.notice-item strong{color:#334e70}.notice-item .notice-danger{color:#e14343}
+@media(max-width:760px){.notice-box{grid-template-columns:1fr}.notice-item.notice-wide{grid-column:auto}.notice-item{padding:21px}.notice-lead{font-size:.8rem}.notice-asset-link{font-size:.8rem;text-align:center}}
 
 /* =========================================================
    FAQ
@@ -2644,6 +2648,20 @@ OPTION
 
         </div>
 
+        <div class="option-card">
+
+            <h3>파일 영구 보관</h3>
+
+            <p>기본 보관 기간 2주 이후에도 완성 파일을 계속 보관합니다.</p>
+
+            <div class="option-info">
+
+                <span>+30,000원</span>
+
+            </div>
+
+        </div>
+
     </div>
 
 </section>
@@ -2831,6 +2849,7 @@ id="portfolioThumbs">
                     <label class="estimate-choice"><input type="checkbox" value="텍스처 원화" data-price="100000"><strong>텍스처 원화</strong><em>+100,000원</em></label>
                     <label class="estimate-choice"><input type="checkbox" value="원화 얼굴 전체 텍스처" data-price="50000"><strong>얼굴 전체 텍스처</strong><em>+50,000원</em></label>
                     <label class="estimate-choice"><input type="checkbox" value="포트폴리오 비공개" data-price="30000"><strong>포트폴리오 비공개</strong><em>+30,000원</em></label>
+                    <label class="estimate-choice"><input type="checkbox" value="파일 영구 보관" data-price="30000"><strong>파일 영구 보관</strong><em>+30,000원</em></label>
                     <div class="estimate-quantity">
                         <div class="estimate-quantity-copy"><strong>추가 컨펌</strong><small>기본 수정 3회 이후 · 회당 5,000원</small></div>
                         <div class="quantity-stepper" aria-label="추가 컨펌 횟수"><button type="button" id="confirmMinus" aria-label="추가 컨펌 줄이기">−</button><output id="confirmCount" aria-live="polite">0</output><button type="button" id="confirmPlus" aria-label="추가 컨펌 늘리기">+</button></div>
@@ -2876,39 +2895,76 @@ id="portfolioThumbs">
 
         <h2>필독사항</h2>
 
+        <p class="notice-lead">필독사항을 읽지 않고 커미션을 진행하여 발생하는 문제는 커미션주가 책임지지 않습니다. 결제 완료 시 아래 내용을 모두 확인하고 동의한 것으로 간주합니다.</p>
+
+        <div class="notice-tools"><a class="notice-asset-link" href="https://pudolle.vercel.app/" target="_blank" rel="noopener noreferrer external">부스 보유 에셋 확인 사이트</a></div>
+
     </div>
 
     <div class="notice-box">
 
-        <div class="notice-item">
+        <article class="notice-item notice-wide">
+            <h3>BOOTH 에셋 구매 및 전달</h3>
+            <ul>
+                <li>BOOTH 에셋은 각 상품의 이용 약관에 따라 <strong class="notice-danger">양측 구매</strong>를 원칙으로 합니다. 작가뿐 아니라 의뢰자님도 사용되는 BOOTH 상품을 각각 1개씩 직접 구매하여 보유하고 계셔야 합니다.</li>
+                <li>제가 보유하지 않은 에셋은 BOOTH의 <strong>Gift(선물하기)</strong> 기능으로 전달해 주세요. 구매 링크나 파일을 임의로 재배포하는 방식은 받지 않습니다.</li>
+                <li>BOOTH 파츠 구매 비용은 커미션 작업 금액에 포함되지 않습니다. Gift로 전달된 상품은 전달이 완료된 시점부터 사용 여부나 작업 취소 사유와 관계없이 <strong class="notice-danger">어떠한 경우에도 환불할 수 없습니다.</strong></li>
+                <li>양측 구매 인증 누락, 이용 약관 위반 또는 저작권 문제로 발생하는 불이익에 대해서는 작가가 책임지지 않습니다. 신청 전 상품별 약관과 사용 범위를 반드시 직접 확인해 주세요.</li>
+            </ul>
+        </article>
 
-            내용 미숙지로 인한 문제는 책임지지 않습니다. 결제시 공지사항에 동의한것으로 간주됩니다.
+        <article class="notice-item">
+            <h3>자료·레퍼런스 및 저작권</h3>
+            <ul>
+                <li>타 작가님의 작품과 유사하게 만들거나 동일하게 복제해 달라는 요청은 받지 않습니다.<span class="notice-no">요청 불가</span></li>
+                <li>캐릭터 일러스트와 Pinterest 이미지는 분위기·색감·방향성 참고 자료로 제출할 수 있으나, 타인의 고유한 디자인을 복제하지 않는 등 저작권을 침해하지 않는 범위에서만 반영합니다.</li>
+                <li>제공 자료의 사용 권한과 출처는 신청자가 확인해야 합니다. 권리 관계가 불분명한 자료는 작업에서 제외하거나 대체 자료를 요청할 수 있습니다.</li>
+            </ul>
+        </article>
 
-        </div>
+        <article class="notice-item">
+            <h3>포트폴리오 공개</h3>
+            <ul>
+                <li>완성 작업물은 작가의 포트폴리오와 작업 샘플로 사용될 수 있습니다.</li>
+                <li>공개를 원하지 않는 경우 신청 단계에서 <strong>포트폴리오 비공개 옵션</strong>을 선택하고 추가 비용을 결제해 주세요. 작업 완료 후의 비공개 전환은 별도 상담이 필요합니다.</li>
+            </ul>
+        </article>
 
-        <div class="notice-item">
+        <article class="notice-item">
+            <h3>작업 기간과 진행 순서</h3>
+            <ul>
+                <li>뚜따 작업 기간은 최대 <strong>7일</strong>, 데뷔 패키지 작업 기간은 최대 <strong>30일</strong>입니다. 작업 기간은 결제일 당일이 아닌 다음 날부터 계산합니다.</li>
+                <li>빠른 마감 또는 당일 마감 옵션을 신청하지 않은 작업은 결제와 자료 확인이 완료된 순서대로 진행합니다. 앞선 신청 건의 작업 상황에 따라 실제 착수 시점이 달라질 수 있습니다.</li>
+                <li>작가 사정으로 일정이 늦어질 가능성이 있을 때에는 미리 안내드립니다. 사전 안내 없이 약속한 최대 작업 기간을 넘긴 경우에는 진행 상태를 확인한 뒤 환불 절차를 안내합니다.</li>
+            </ul>
+        </article>
 
-            BOOTH에서 구매하신 파츠들로 진행됩니다.
+        <article class="notice-item">
+            <h3>완성 파일 보관</h3>
+            <ul>
+                <li>완성 파일은 최종 전달일로부터 <strong>2주 동안</strong> 보관한 뒤 삭제합니다. 기간이 지난 파일은 복구나 재전달이 어려울 수 있으므로 수령 즉시 별도로 백업해 주세요.</li>
+                <li>추가 작업을 이어서 맡길 예정이라면 파일 삭제 전에 미리 말씀해 주세요. 장기 보관이 필요한 경우 <strong>파일 영구 보관 옵션 +30,000원</strong>을 신청할 수 있습니다.</li>
+            </ul>
+        </article>
 
-        </div>
+        <article class="notice-item notice-wide">
+            <h3>수정·컨펌 범위</h3>
+            <ul>
+                <li>모든 작업의 기본 수정은 최대 <strong>3회</strong>입니다. 한 번의 컨펌에서 변경할 내용을 가능한 한 구체적으로 모아 전달해 주세요.</li>
+                <li>성형 컨펌이 끝나고 페이셜 작업까지 완료된 이후에는 성형 단계로 되돌아가는 수정이 어렵습니다. 이후 수정은 작업 범위에 따라 추가 비용이 발생하므로 각 단계에서 신중하게 확인해 주세요.</li>
+                <li>캐릭터의 전체 방향이나 콘셉트를 바꾸는 요청, 확정된 내용을 처음부터 다시 제작해야 하는 무리한 변경 요청은 받지 않습니다.</li>
+                <li>작가의 작업 실수로 필요한 수정은 기본 수정 횟수에서 차감하지 않습니다. 신청자의 자료 누락, 전달 착오 또는 확정 후 변심으로 인한 수정은 횟수에 포함됩니다.</li>
+            </ul>
+            <span class="notice-note">기본 3회를 초과한 수정은 1회당 5,000원의 추가 컨펌 비용이 발생합니다. 수정 가능 여부와 비용은 요청 범위를 확인한 뒤 안내드립니다.</span>
+        </article>
 
-        <div class="notice-item">
-
-            구매하신 소스는 2차 배포, 저작권 양도,2차 가공 등이 허용된 모델만 가능합니다.
-
-        </div>
-
-        <div class="notice-item">
-
-            양측 구매를 기본으로 하며,작업자가 보유하지 않은 파일은 기프트로 보내주셔야 합니다.
-
-        </div>
-
-        <div class="notice-item">
-
-            포트폴리오 공개를 원하지 않으실 경우 포토폴리오 비공개 비용을 지불 부탁드립니다.
-
-        </div>
+        <article class="notice-item notice-wide">
+            <h3>페이셜 사용 환경</h3>
+            <ul>
+                <li>페이셜 기능을 사용하려면 <strong>Face ID를 지원하는 iPhone 또는 iPad</strong>가 필요합니다. 신청 전 사용 중인 기기의 Face ID 지원 여부와 방송 프로그램 연동 환경을 확인해 주세요.</li>
+                <li>지원 기기 미보유나 신청자의 환경 설정 문제로 페이셜을 사용할 수 없는 경우는 작업물의 하자에 해당하지 않습니다. 해당 내용을 숙지하지 않은 상태에서의 악성 문의 또는 환불 요청은 받지 않습니다.</li>
+            </ul>
+        </article>
 
     </div>
 
