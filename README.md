@@ -26,7 +26,7 @@
 
 ```html
 <div id="pupuCommissionMount" style="display:block;width:100%;margin:0;padding:0"></div>
-<script src="https://dpfl123.github.io/artmug-github-pages/artmug-loader.js?v=20260828-4"></script>
+<script src="https://dpfl123.github.io/artmug-github-pages/artmug-loader.js?v=20260828-5"></script>
 ```
 
 `artmug-loader.js`가 아트머그 내부에 격리된 상세페이지를 만들고 `pupu-runtime.js`가 페이지 전환과 FAQ 등 상호작용을 실행합니다.
@@ -39,3 +39,7 @@
 - 모든 링크와 이미지 주소는 HTTPS만 사용합니다.
 - 신청 링크는 새 창으로 열리며 원본 페이지 제어를 막는 `noopener noreferrer`가 적용되어 있습니다.
 - `index.html`에는 불필요한 외부 통신, 플러그인 객체, 중첩 프레임 및 폼 전송을 제한하는 콘텐츠 보안 정책이 포함되어 있습니다.
+
+## 폰트 출처
+
+KCC간판체는 한국저작권위원회가 배포한 안심글꼴이며, 출처 표시 조건에 따라 사용합니다. 폰트 파일 출처: 한국저작권위원회 공유마당.
