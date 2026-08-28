@@ -26,7 +26,7 @@
 
 ```html
 <div id="pupuCommissionMount" style="display:block;width:100%;margin:0;padding:0"></div>
-<script src="https://dpfl123.github.io/artmug-github-pages/artmug-loader.js?v=20260828-5"></script>
+<script src="https://dpfl123.github.io/artmug-github-pages/artmug-loader.js?v=20260828-6"></script>
 ```
 
 `artmug-loader.js`가 아트머그 내부에 격리된 상세페이지를 만들고 `pupu-runtime.js`가 페이지 전환과 FAQ 등 상호작용을 실행합니다.
@@ -42,4 +42,4 @@
 
 ## 폰트 출처
 
-KCC간판체는 한국저작권위원회가 배포한 안심글꼴이며, 출처 표시 조건에 따라 사용합니다. 폰트 파일 출처: 한국저작권위원회 공유마당.
+학교안심 지우개는 교육부·시도교육청·한국교육학술정보원이 보급한 학교안심폰트이며 OFL 조건으로 사용합니다. 폰트 파일 출처: 교육저작권지원센터.
