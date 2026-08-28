@@ -9,6 +9,7 @@ contentOrder.forEach(id => {
     const section = document.getElementById(id);
     if (section) mainContent.appendChild(section);
 });
+document.querySelectorAll('.artist-link[aria-disabled="true"]').forEach(link => link.addEventListener("click", event => event.preventDefault()));
 
 document.addEventListener("DOMContentLoaded", () => {
 
