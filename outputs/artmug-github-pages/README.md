@@ -1,0 +1,47 @@
+# 아트머그용 GitHub Pages 배포 파일
+
+## 폴더 구조
+
+- `index.html`: 배포할 상세 페이지
+- `img/banner.webp`: 상단 배너 이미지
+- `avatar/manuka.webp`: 마누카 아바타 이미지
+- `portfolio/01.webp` ~ `portfolio/20.webp`: 포트폴리오 이미지
+- `.nojekyll`: GitHub Pages가 파일을 그대로 배포하도록 하는 설정
+
+원본 첨부에는 HTML만 포함되어 있어 위 이미지 파일은 들어 있지 않습니다. 같은 이름과 경로로 이미지를 추가해야 기존 디자인이 완성됩니다. 파일명은 영문 소문자와 숫자를 권장합니다.
+
+## GitHub Pages 연결
+
+1. GitHub에서 새 저장소를 만듭니다. 무료 계정이라면 Pages 공개를 위해 `Public` 저장소가 가장 간단합니다.
+2. 이 폴더 안의 파일과 이미지 폴더를 저장소 최상위에 업로드합니다. 개인 정보, 신청자 자료, 원본 작업 파일, 비밀번호나 토큰은 올리지 마세요.
+3. 저장소의 `Settings` → `Pages`로 이동합니다.
+4. `Build and deployment`의 Source를 `Deploy from a branch`로 선택합니다.
+5. Branch는 `main`, 폴더는 `/(root)`를 선택하고 저장합니다.
+6. 배포가 끝나면 `https://사용자명.github.io/저장소명/` 주소로 접속합니다.
+7. Pages 설정에서 `Enforce HTTPS`가 켜져 있는지 확인합니다.
+
+## 아트머그에 연결
+
+아트머그 편집기가 외부 링크를 지원하면 위의 `https://...github.io/.../` 주소를 링크 버튼에 넣습니다. HTML 또는 iframe 삽입을 지원하는 경우에만 아래 형식을 사용합니다.
+
+```html
+<iframe
+  src="https://사용자명.github.io/저장소명/"
+  title="푸푸 커미션 상세 페이지"
+  loading="lazy"
+  referrerpolicy="strict-origin-when-cross-origin"
+  sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"
+  style="width:100%;min-height:900px;border:0"
+></iframe>
+```
+
+아트머그가 iframe이나 script를 삭제하면 보안 정책에 따른 정상 동작입니다. 우회하지 말고 외부 페이지 링크 방식으로 연결하세요. 게시 전에 아트머그 고객센터에 외부 페이지·iframe 허용 여부를 확인하는 것이 안전합니다.
+
+## 보안 점검
+
+- GitHub Pages 저장소와 배포 페이지는 공개된다고 가정합니다.
+- 신청자 이름, 연락처, 결제 정보, 작업 원본 및 비공개 자료를 저장소에 넣지 않습니다.
+- 외부 스크립트, 광고 코드, 추적기 및 분석 코드를 추가하지 않습니다.
+- 모든 링크와 이미지 주소는 HTTPS만 사용합니다.
+- 신청 링크는 새 창으로 열리며 원본 페이지 제어를 막는 `noopener noreferrer`가 적용되어 있습니다.
+- `index.html`에는 불필요한 외부 통신, 플러그인 객체, 중첩 프레임 및 폼 전송을 제한하는 콘텐츠 보안 정책이 포함되어 있습니다.
