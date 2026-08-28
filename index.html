@@ -2078,6 +2078,7 @@ scale(1.5);
 .estimate-quantity-copy strong{display:block;color:#27334b;font-size:15px}.estimate-quantity-copy small{display:block;margin-top:3px;color:#8490a5;font-size:11px}
 .quantity-stepper{display:flex;align-items:center;gap:5px;padding:4px;border:1px solid #cfe4f5;border-radius:13px;background:#f5fbff}.quantity-stepper button{display:grid;place-items:center;width:32px;height:32px;border:0;border-radius:9px;background:#fff;color:#3e8fc9;font:inherit;font-size:19px;cursor:pointer;box-shadow:0 3px 8px rgba(70,125,170,.1)}.quantity-stepper button:disabled{opacity:.35;cursor:not-allowed}.quantity-stepper output{min-width:30px;text-align:center;color:#263650;font-size:14px}.estimate-quantity-price{color:#398dce;font-size:12px;white-space:nowrap}
 .estimate-fields{display:grid;gap:13px}.estimate-field{display:grid;gap:7px}.estimate-field label{color:#42506a;font-size:13px}
+.estimate-field-guide{margin:0;padding:11px 13px;border:1px solid #d4e9f8;border-radius:13px;background:rgba(226,243,255,.62);color:#56728d;font-size:12px;line-height:1.65}
 .estimate-field input,.estimate-field textarea,.estimate-field select{width:100%;box-sizing:border-box;border:1px solid #d4e6f5;border-radius:14px;background:rgba(255,255,255,.8);padding:13px 14px;color:#25334c;font:inherit;font-size:13px;outline:none;transition:.2s}
 .estimate-field textarea{min-height:105px;resize:vertical;line-height:1.6}.estimate-field input:focus,.estimate-field textarea:focus,.estimate-field select:focus{border-color:#62b3f0;box-shadow:0 0 0 4px rgba(98,179,240,.13)}
 .estimate-result{margin-top:18px;padding:22px;border-radius:20px;background:linear-gradient(135deg,#253a62,#3f74a8);color:#fff;box-shadow:0 15px 28px rgba(44,89,133,.2)}
@@ -2807,7 +2808,9 @@ id="portfolioThumbs">
                 <h3>상담에 필요한 내용을 적어주세요</h3>
                 <p class="estimate-help">작성 내용은 서버로 전송되지 않고 현재 화면에서만 정리됩니다.</p>
                 <div class="estimate-fields">
-                    <div class="estimate-field"><label for="requestName">닉네임</label><input id="requestName" type="text" maxlength="30" placeholder="상담할 때 사용할 이름"></div>
+                    <p class="estimate-field-guide">데뷔 예정인 경우에는 데뷔 후 사용할 예정인 방송 닉네임과 방송국 주소를 적어주세요.</p>
+                    <div class="estimate-field"><label for="requestName">방송 닉네임</label><input id="requestName" type="text" maxlength="30" placeholder="현재 또는 데뷔 예정 방송 닉네임"></div>
+                    <div class="estimate-field"><label for="requestChannel">방송국 주소</label><input id="requestChannel" type="url" inputmode="url" maxlength="300" placeholder="https:// 로 시작하는 방송 채널 주소"></div>
                     <div class="estimate-field"><label for="requestContact">상담 연락처 또는 아이디</label><input id="requestContact" type="text" maxlength="80" placeholder="답변받을 수 있는 연락처·SNS 아이디"></div>
                     <div class="estimate-field"><label for="requestProgram">사용 프로그램</label><select id="requestProgram"><option value="미정">아직 정하지 않았어요</option><option value="와루도 (준비 중)">와루도 (준비 중)</option><option value="VSeeFace">VSeeFace</option><option value="기타 / 상담 필요">기타 / 상담 필요</option></select></div>
                     <div class="estimate-field"><label for="requestDeadline">희망 마감일</label><input id="requestDeadline" type="date"></div>
@@ -3501,6 +3504,7 @@ if (estimateSection) {
     const packageInputs = [...estimateSection.querySelectorAll('input[name="estimatePackage"]')];
     const optionInputs = [...estimateSection.querySelectorAll('#estimateOptions input')];
     const nameInput = document.getElementById("requestName");
+    const channelInput = document.getElementById("requestChannel");
     const contactInput = document.getElementById("requestContact");
     const programInput = document.getElementById("requestProgram");
     const deadlineInput = document.getElementById("requestDeadline");
@@ -3530,7 +3534,7 @@ if (estimateSection) {
         confirmPlus.disabled = confirmCount === 10;
         totalOutput.textContent = `${total.toLocaleString("ko-KR")}원`;
         summaryOutput.textContent = `패키지  ${selectedPackage.value}\n추가 옵션  ${optionText}`;
-        requestText = `[커미션 견적 상담]\n닉네임: ${nameInput.value.trim() || "미입력"}\n상담 연락처: ${contactInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n희망 마감일: ${deadlineInput.value || "미정"}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
+        requestText = `[커미션 견적 상담]\n방송 닉네임: ${nameInput.value.trim() || "미입력"}\n방송국 주소: ${channelInput.value.trim() || "미입력"}\n상담 연락처: ${contactInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n희망 마감일: ${deadlineInput.value || "미정"}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
     }
 
     async function copyRequest() {
@@ -3551,7 +3555,7 @@ if (estimateSection) {
         window.setTimeout(() => copyButton.textContent = "의뢰 내용 복사", 1800);
     }
 
-    [...packageInputs, ...optionInputs, nameInput, contactInput, programInput, deadlineInput, referenceInput, memoInput].forEach(input => {
+    [...packageInputs, ...optionInputs, nameInput, channelInput, contactInput, programInput, deadlineInput, referenceInput, memoInput].forEach(input => {
         input.addEventListener("input", updateEstimate);
         input.addEventListener("change", updateEstimate);
     });
@@ -3563,6 +3567,7 @@ if (estimateSection) {
         optionInputs.forEach(input => input.checked = false);
         confirmCount = 0;
         nameInput.value = "";
+        channelInput.value = "";
         contactInput.value = "";
         programInput.selectedIndex = 0;
         deadlineInput.value = "";

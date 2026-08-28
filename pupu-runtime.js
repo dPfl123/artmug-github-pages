@@ -546,6 +546,7 @@ if (estimateSection) {
     const packageInputs = [...estimateSection.querySelectorAll('input[name="estimatePackage"]')];
     const optionInputs = [...estimateSection.querySelectorAll('#estimateOptions input')];
     const nameInput = document.getElementById("requestName");
+    const channelInput = document.getElementById("requestChannel");
     const contactInput = document.getElementById("requestContact");
     const programInput = document.getElementById("requestProgram");
     const deadlineInput = document.getElementById("requestDeadline");
@@ -575,7 +576,7 @@ if (estimateSection) {
         confirmPlus.disabled = confirmCount === 10;
         totalOutput.textContent = `${total.toLocaleString("ko-KR")}원`;
         summaryOutput.textContent = `패키지  ${selectedPackage.value}\n추가 옵션  ${optionText}`;
-        requestText = `[커미션 견적 상담]\n닉네임: ${nameInput.value.trim() || "미입력"}\n상담 연락처: ${contactInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n희망 마감일: ${deadlineInput.value || "미정"}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
+        requestText = `[커미션 견적 상담]\n방송 닉네임: ${nameInput.value.trim() || "미입력"}\n방송국 주소: ${channelInput.value.trim() || "미입력"}\n상담 연락처: ${contactInput.value.trim() || "미입력"}\n패키지: ${selectedPackage.value}\n추가 옵션: ${optionText}\n사용 프로그램: ${programInput.value}\n희망 마감일: ${deadlineInput.value || "미정"}\n자료 링크: ${referenceInput.value.trim() || "미입력"}\n요청사항: ${memoInput.value.trim() || "미입력"}\n예상 견적: ${total.toLocaleString("ko-KR")}원\n\n※ 자동 계산된 상담용 예상 금액이며 최종 견적은 자료 확인 후 확정됩니다.`;
     }
 
     async function copyRequest() {
@@ -596,7 +597,7 @@ if (estimateSection) {
         window.setTimeout(() => copyButton.textContent = "의뢰 내용 복사", 1800);
     }
 
-    [...packageInputs, ...optionInputs, nameInput, contactInput, programInput, deadlineInput, referenceInput, memoInput].forEach(input => {
+    [...packageInputs, ...optionInputs, nameInput, channelInput, contactInput, programInput, deadlineInput, referenceInput, memoInput].forEach(input => {
         input.addEventListener("input", updateEstimate);
         input.addEventListener("change", updateEstimate);
     });
@@ -608,6 +609,7 @@ if (estimateSection) {
         optionInputs.forEach(input => input.checked = false);
         confirmCount = 0;
         nameInput.value = "";
+        channelInput.value = "";
         contactInput.value = "";
         programInput.selectedIndex = 0;
         deadlineInput.value = "";
