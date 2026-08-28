@@ -920,6 +920,7 @@ box-shadow:
 @media(max-width:680px){.portfolio-category-grid{grid-template-columns:1fr}.portfolio-category{padding:18px}.portfolio-lock,.portfolio-empty{padding:38px 18px}}
 
 .hamster-particle{position:fixed;left:0;top:0;z-index:10050;pointer-events:none;font-family:"Segoe UI Emoji","Apple Color Emoji",sans-serif;filter:drop-shadow(0 5px 7px rgba(68,48,43,.24));animation:hamsterParty .9s cubic-bezier(.14,.75,.24,1) forwards}
+.hamster-particle.is-hamster{width:48px;height:48px;object-fit:contain}
 @keyframes hamsterParty{0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(0)}18%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--hx)),calc(-50% + var(--hy))) scale(1.15) rotate(var(--hr))}}
 
 .timeline{max-width:1120px;margin:55px auto 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;position:relative}
@@ -3447,16 +3448,23 @@ document.addEventListener("DOMContentLoaded", () => {
    Hamster click party
 ========================== */
 document.addEventListener("click", event => {
-    const icons = ["🐹", "🐹", "🐹", "✦", "♡", "🐾", "✧"];
+    const icons = ["hamster", "hamster", "hamster", "✦", "♡", "🐾", "✧"];
     icons.forEach((icon, index) => {
-        const particle = document.createElement("span");
+        const particle = document.createElement(icon === "hamster" ? "img" : "span");
         const angle = (Math.PI * 2 * index / icons.length) + (Math.random() - .5) * .35;
         const distance = 68 + Math.random() * 58;
         particle.className = "hamster-particle";
-        particle.textContent = icon;
+        if (icon === "hamster") {
+            particle.classList.add("is-hamster");
+            particle.src = "img/hamster-particle.png";
+            particle.alt = "";
+        } else {
+            particle.textContent = icon;
+        }
         particle.style.left = `${event.clientX}px`;
         particle.style.top = `${event.clientY}px`;
-        particle.style.fontSize = `${icon === "🐹" ? 28 + Math.random() * 10 : 20 + Math.random() * 8}px`;
+        if (icon === "hamster") particle.style.width = `${44 + Math.random() * 14}px`;
+        else particle.style.fontSize = `${20 + Math.random() * 8}px`;
         particle.style.setProperty("--hx", `${Math.cos(angle) * distance}px`);
         particle.style.setProperty("--hy", `${Math.sin(angle) * distance - 26}px`);
         particle.style.setProperty("--hr", `${-35 + Math.random() * 70}deg`);

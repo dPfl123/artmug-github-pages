@@ -456,16 +456,23 @@ document.addEventListener("DOMContentLoaded", () => {
    Hamster click party
 ========================== */
 document.addEventListener("click", event => {
-    const icons = ["🐹", "🐹", "🐹", "✦", "♡", "🐾", "✧"];
+    const icons = ["hamster", "hamster", "hamster", "✦", "♡", "🐾", "✧"];
     icons.forEach((icon, index) => {
-        const particle = document.createElement("span");
+        const particle = document.createElement(icon === "hamster" ? "img" : "span");
         const angle = (Math.PI * 2 * index / icons.length) + (Math.random() - .5) * .35;
         const distance = 68 + Math.random() * 58;
         particle.className = "hamster-particle";
-        particle.textContent = icon;
+        if (icon === "hamster") {
+            particle.classList.add("is-hamster");
+            particle.src = "img/hamster-particle.png";
+            particle.alt = "";
+        } else {
+            particle.textContent = icon;
+        }
         particle.style.left = `${event.clientX}px`;
         particle.style.top = `${event.clientY}px`;
-        particle.style.fontSize = `${icon === "🐹" ? 28 + Math.random() * 10 : 20 + Math.random() * 8}px`;
+        if (icon === "hamster") particle.style.width = `${44 + Math.random() * 14}px`;
+        else particle.style.fontSize = `${20 + Math.random() * 8}px`;
         particle.style.setProperty("--hx", `${Math.cos(angle) * distance}px`);
         particle.style.setProperty("--hy", `${Math.sin(angle) * distance - 26}px`);
         particle.style.setProperty("--hr", `${-35 + Math.random() * 70}deg`);
